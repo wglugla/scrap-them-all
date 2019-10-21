@@ -1,7 +1,6 @@
-import * as express from 'express';
+import app from './app';
+const PORT = 3000;
 
-const app = express();
-
-app.get('/', (req, res) => res.send('Hello, scrapper!!'));
-
-app.listen(3000, () => console.log('Start listening on port 3000'));
+app.listen(PORT, () => {
+  console.log('Express server listening on port ' + PORT);
+});

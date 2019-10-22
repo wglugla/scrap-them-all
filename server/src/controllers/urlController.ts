@@ -6,16 +6,15 @@ const cheerio = require('cheerio');
 export class UrlController {
   public getImages(req: Request, res: Response) {
     const { url } = req.query;
-    // res.json(url);
     axios
       .get(url)
       .then(resp => {
-        const content = resp.data;
-        const $ = cheerio.load(content);
-        const urlList = Object.keys($('img')).map(i =>
-          $('img')[i].attribs ? `${url}${$('img')[i].attribs.src}` : ''
-        );
-        res.json(urlList);
+        const $ = cheerio.load(resp.data);
+        const images = $('img');
+        const imagesAttribs = Object.keys(images).map(key => images[key].attribs);
+        const data = imagesAttribs.filter(data => data !== undefined);
+        data.forEach(d => (d.src = d.src.replace(/^/, url)));
+        res.json(data);
       })
       .catch(err => {
         res.json(err);

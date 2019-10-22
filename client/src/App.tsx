@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { MouseEvent, useState } from 'react';
 import './App.css';
 
+import Form from './components/Form';
+import ImagesList from './components/ImagesList';
+
 const App: React.FC = () => {
+  const [fetched, setFetched] = useState(false);
+  const [list, setList] = useState([]);
+  const [url, setUrl] = useState('https://www.google.pl');
+
+  const scrapWebsite = async (e: MouseEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:4000/?url=${url}`);
+      const data = await response.json();
+      console.log(data);
+      setList(data);
+      setFetched(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Form url={url} setUrl={setUrl} scraper={scrapWebsite} />
+      {fetched && <ImagesList list={list} />}
     </div>
   );
-}
+};
 
 export default App;

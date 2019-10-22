@@ -13,7 +13,13 @@ export class UrlController {
         const images = $('img');
         const imagesAttribs = Object.keys(images).map(key => images[key].attribs);
         const data = imagesAttribs.filter(data => data !== undefined);
-        data.forEach(d => (d.src = d.src.replace(/^/, url)));
+        data.forEach(d => {
+          let fullSrc: string = d.src;
+          let regexp: RegExp = /^(http|https):/; //;
+          if (!fullSrc.match(regexp)) {
+            d.src = d.src.replace(/^/, url);
+          }
+        });
         res.json(data);
       })
       .catch(err => {

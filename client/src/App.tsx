@@ -1,13 +1,14 @@
 import React, { MouseEvent, useState } from 'react';
 import './App.css';
+import { StyledTitle, StyledHeader, Container } from './styled';
 
-import Form from './components/Form';
+import Form from './components/Form/Form';
 import ImagesList from './components/ImagesList';
 
 const App: React.FC = () => {
   const [fetched, setFetched] = useState(false);
   const [list, setList] = useState([]);
-  const [url, setUrl] = useState('https://www.google.pl');
+  const [url, setUrl] = useState('https://www.wp.pl');
 
   const scrapWebsite = async (e: MouseEvent) => {
     e.preventDefault();
@@ -23,10 +24,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className='App'>
-      <Form url={url} setUrl={setUrl} scraper={scrapWebsite} />
+    <>
+      <Container>
+        <StyledHeader>
+          <StyledTitle> The easiest way to scrap images from website </StyledTitle>
+        </StyledHeader>
+        <Form url={url} setUrl={setUrl} scraper={scrapWebsite} />
+      </Container>
       {fetched && <ImagesList list={list} />}
-    </div>
+    </>
   );
 };
 

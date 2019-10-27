@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
+import { StyledInput, StyledButton, StyledForm, InputCase, StyledLabel } from './FormStyle';
+
 export interface Props {
   scraper: (e: React.MouseEvent) => void;
   url: string;
@@ -15,12 +17,15 @@ const Form = (props: Props) => {
   };
 
   return (
-    <form>
-      <input type='text' value={url} onChange={changeUrl} />
-      <button type='button' onClick={scraper}>
+    <StyledForm>
+      <InputCase>
+        {/* <StyledLabel htmlFor='searchInput'> Website url </StyledLabel> */}
+        <StyledInput id='searchInput' type='text' value={url} onChange={changeUrl} />
+      </InputCase>
+      <StyledButton type='submit' onClick={scraper}>
         Scrap
-      </button>
-    </form>
+      </StyledButton>
+    </StyledForm>
   );
 };
 

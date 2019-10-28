@@ -1,4 +1,4 @@
-import { Request, Response, Application } from 'express';
+import { Application } from 'express';
 import { UrlController } from '../controllers/urlController';
 
 export class Routes {

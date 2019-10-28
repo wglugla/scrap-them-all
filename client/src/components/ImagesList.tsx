@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Masonry from 'react-masonry-component';
 import styled from 'styled-components';
 
 const Macy = require('macy');
@@ -25,39 +24,6 @@ const StyledImg = styled.img`
   padding: 1rem;
   box-sizing: border-box;
 `;
-
-// const masonryOptions = {
-//   columnWidth: 100,
-//   percentPosition: true,
-//   fitWidth: true,
-//   gutter: 2
-// };
-
-// const StyledMasonry = styled(Masonry)`
-//   margin: 2rem auto;
-// `;
-
-// const ImagesList = (props: Props) => {
-//   const { list } = props;
-
-//   const childElements = list.map((image, i) => (
-//     <li key={i} className='image-element-class'>
-//       <img src={image.src} alt='' />
-//     </li>
-//   ));
-
-//   return (
-//     <StyledMasonry
-//       className={'masonry-gallery'}
-//       elementType={'ul'}
-//       options={masonryOptions}
-//       disableImagesLoaded={false}
-//       updateOnEachImageLoad={false}
-//     >
-//       {childElements}
-//     </StyledMasonry>
-//   );
-// };
 
 const ImagesList = (props: Props) => {
   const { list } = props;
